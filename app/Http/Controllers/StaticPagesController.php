@@ -8,19 +8,24 @@ class StaticPagesController extends Controller
 {
     public function home()
     {
-        return view('app.home');
+        return $this->slidePhoto();
     }
 
     public function pic_one(Request $request)
     {
         $pci_selected = $request->pic;
+        session()->flash('picNum', $pci_selected);
         return view('app' . '.' . $pci_selected)->with('currPic', $pci_selected);
     }
 
     public function slidePhoto($picNum = 0)
     {
-        $adjustedPicNum = ($picNum == 1 ? 11 : $picNum - 1);
+        if (session()->has('picNum')) {
+            $picNum = session()->get('picNum');
+        }
+        $adjustedPicNum = ($picNum == 0 ? 11 : $picNum - 1);
+        error_log('Showcasing ' . $adjustedPicNum);
         // adjustedPicNum = ($request->picNum == 1 ? 11 : $request->picNum - 1);
-        return view('app.home')->with('currPic', $adjustedPicNum);
+        return view('app.home')->with(array('currPic' => $adjustedPicNum));
     }
 }

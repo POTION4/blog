@@ -5,6 +5,7 @@
     <title>ISMTA实验室</title>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="shortcut icon" href="/img/zhandiantubiao.ico" type="image/x-icon">
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
     @include('layouts._header')
